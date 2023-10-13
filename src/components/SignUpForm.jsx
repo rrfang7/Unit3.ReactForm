@@ -2,7 +2,7 @@ import { useState } from "react"
 
 
 
-export default function SignUpForm() {
+export default function SignUpForm({token, setToken}) {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState(null)
@@ -11,9 +11,24 @@ export default function SignUpForm() {
         event.preventDefault();
 
         try {
-            const response = await fetch("https://fsa-jwt-practice.herokuapp.com/signup")
-            const result = await response.json();
-            console.log(result)
+            const response = await fetch("https://fsa-jwt-practice.herokuapp.com/signup",{
+              method: "POST",
+              headers:{
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({
+                username: username,
+                password: "fgawe"
+              })
+            })
+            if(username.length ===8){
+              const result = await response.json();
+              setToken(result.token);
+            }else{
+              alert("username must be eight characters")
+            }
+            
+            //console.log(result)
         } catch (error) {
             console.error(error)
             setError(error.message)
