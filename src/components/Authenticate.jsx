@@ -36,3 +36,4 @@ export default function Authenticate({token, setToken}) {
 }
 // {false && true}  {a && b} will never run,   it has to be both true, so if error is true, then we render
 //if error is false, meaning, no error, then we don't render 
+
